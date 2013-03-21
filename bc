@@ -14,10 +14,10 @@ import sys
 def error_code (code):
 
     error_message = {
-                 1: 'No number specified!',
-                 2: 'No operation specified!',
-                 3: 'Invalid input base, specified!',
-                 4: 'Invalid output base, specified!'
+                        1: 'No number specified!',
+                        2: 'No operation specified!',
+                        3: 'Invalid input base, specified!',
+                        4: 'Invalid output base, specified!'
     }
 
     print (error_message [code])
