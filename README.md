@@ -21,6 +21,5 @@ Use:
 	bc 2 db 
 	#Converts number '2' of decimal base to its binary equivalent.
 
-
 	#Output
 	Input: 2 Output: 10	
