@@ -1,0 +1,177 @@
+#! /usr/bin/python3
+
+'''Program to perform various conversions, among the various,
+   base systems; binary, octal, decimal and hexadecimal,
+   uses only to direct functions x->10 and 10->x.
+'''
+
+#Most work done.
+#TODO
+#Provide checking for erronous conversions, eg. 15 bd, 8 od
+
+import sys
+
+def error_code (code):
+
+    error_message = {
+                 1: 'No number specified!',
+                 2: 'No operation specified!',
+                 3: 'Invalid input base, specified!',
+                 4: 'Invalid output base, specified!'
+    }
+
+    print (error_message [code])
+
+    if (code == 1 or code == 2):
+        return
+
+    sys.exit (code)
+
+
+def option_code (code):
+
+    option_message = {                 
+                 '--help': 'Usage: bc <number> <current-base><desired-base>, Example: bc 100 do'
+    }
+
+    if code not in option_message:
+        return
+
+    print (option_message [code])
+    sys.exit (0)
+
+
+def get_input ():
+
+    number, operation = '--help',''
+
+    try:
+        operation = sys.argv[2]
+    except IndexError:
+        error_code (2)
+
+    try:
+        number = sys.argv[1]
+    except IndexError:
+        error_code (1)
+
+    return number, operation
+
+
+def x_to_decimal (number, base):
+
+    decimal, count = 0, 0
+
+    number_codes = {
+                    '0': 0,
+                    '1': 1,
+                    '2': 2,
+                    '3': 3,
+                    '4': 4,
+                    '5': 5,
+                    '6': 6,
+                    '7': 7,
+                    '8': 8,
+                    '9': 9,
+                    'A': 10,
+                    'B': 11,
+                    'C': 12,
+                    'D': 13,
+                    'E': 14,
+                    'F': 15
+    }
+
+
+    while (number != ''):
+
+        temp   = number_codes[number[-1]]
+        number = number[:-1]
+        
+        decimal+= temp*(base**count)
+        count+=1
+
+    return decimal
+
+
+def decimal_to_x (number, base):
+
+    result = ''
+
+    number_codes = {
+                    0  :'0',
+                    1  :'1',
+                    2  :'2',
+                    3  :'3',
+                    4  :'4',
+                    5  :'5',
+                    6  :'6',
+                    7  :'7',
+                    8  :'8',
+                    9  :'9',
+                    10 :'A',
+                    11 :'B',
+                    12 :'C',
+                    13 :'D',
+                    14 :'E',
+                    15 :'F'
+    }
+
+    while (number > 0):
+
+        temp = number_codes[number%base]
+        number//=base
+
+        result = temp+result
+
+    return result
+
+
+def convert (number, operation):
+
+    option_code (number)
+
+    input_base   = operation[0]
+    output_base  = operation[1]
+
+    input_number  = number
+    output_number = ''
+
+    base_codes = {
+                    'b':2,
+                    'o':8,
+                    'd':10,
+                    'h':16
+    }
+
+    if (input_base not in base_codes):
+        error_code (3)
+    if (output_base not in base_codes):
+        error_code (4)
+
+    if (input_base != 'd'):
+        number = x_to_decimal (number, base_codes[input_base])
+
+    else:
+        number = int (number)
+
+    if (output_base == 'd'):
+        output_number = number
+
+    else:
+        output_number = decimal_to_x (number, base_codes[output_base])
+
+
+    print ('Input:',input_number,'Output:',output_number)
+
+
+def main ():
+
+    number, operation = get_input()
+
+    convert (number, operation)
+
+
+main ()
+
+
+
