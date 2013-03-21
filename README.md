@@ -7,7 +7,6 @@ Usage:
 
 	bc <number> <operation>
 
-
 Options:
 
 	b - binary
@@ -15,7 +14,7 @@ Options:
 	d - decmal
 	h - hexa-decimal
 
-Use:
+Example:
 
 	#Input
 	bc 2 db 
@@ -23,3 +22,14 @@ Use:
 
 	#Output
 	Input: 2 Output: 10	
+
+Troubleshooting:
+
+	1. Having issues in running?
+	1. Most probably a permissions issue, run
+
+		chmod +x bc
+
+	   to fix.
+
+
