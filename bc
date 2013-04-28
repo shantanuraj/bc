@@ -17,45 +17,62 @@ def error_code (code):
                         1: 'No number specified!',
                         2: 'No operation specified!',
                         3: 'Invalid input base, specified!',
-                        4: 'Invalid output base, specified!'
+                        4: 'Invalid output base, specified!',
+                        5: 'Invalid number specified for given base!'
     }
 
-    print (error_message [code])
+    help = 'Usage: bc <number> <current-base><desired-base>, Example: bc 100 do'
 
-    if (code == 1 or code == 2):
-        return
+    print (error_message [code])
+    print (help)
 
     sys.exit (code)
 
 
-def option_code (code):
-
-    option_message = {                 
-                 '--help': 'Usage: bc <number> <current-base><desired-base>, Example: bc 100 do'
-    }
-
-    if code not in option_message:
-        return
-
-    print (option_message [code])
-    sys.exit (0)
-
-
 def get_input ():
 
-    number, operation = '--help',''
-
-    try:
-        operation = sys.argv[2]
-    except IndexError:
-        error_code (2)
+    number, operation, = '',''
 
     try:
         number = sys.argv[1]
     except IndexError:
         error_code (1)
+    try:
+        operation = sys.argv[2]
+    except IndexError:
+        error_code (2)
 
     return number, operation
+
+
+def check_input (number, base):
+
+    if (base == 'b' or base == 'o' or base == 'd'):
+        try:
+            number = int (number)
+        except ValueError:
+            error_code (5)
+
+    check = range_check (number, base)
+    if (check == False):
+        error_code (5)
+
+    return True
+
+def range_check (number, base):
+
+    range = {
+                'b':'01',
+                'o':'01234567',
+                'd':'0123456789',
+                'h':'0123456789abcdef'
+    }
+
+    for digit in number:
+        if digit not in range [base]:
+            return False
+
+    return True
 
 
 def x_to_decimal (number, base):
@@ -73,12 +90,12 @@ def x_to_decimal (number, base):
                     '7': 7,
                     '8': 8,
                     '9': 9,
-                    'A': 10,
-                    'B': 11,
-                    'C': 12,
-                    'D': 13,
-                    'E': 14,
-                    'F': 15
+                    'a': 10,
+                    'b': 11,
+                    'c': 12,
+                    'd': 13,
+                    'e': 14,
+                    'f': 15
     }
 
 
@@ -108,12 +125,12 @@ def decimal_to_x (number, base):
                     7  :'7',
                     8  :'8',
                     9  :'9',
-                    10 :'A',
-                    11 :'B',
-                    12 :'C',
-                    13 :'D',
-                    14 :'E',
-                    15 :'F'
+                    10 :'a',
+                    11 :'b',
+                    12 :'c',
+                    13 :'d',
+                    14 :'e',
+                    15 :'f'
     }
 
     while (number > 0):
@@ -128,12 +145,12 @@ def decimal_to_x (number, base):
 
 def convert (number, operation):
 
-    option_code (number)
-
     input_base   = operation[0]
     output_base  = operation[1]
 
     input_number  = number
+    number = number.lower()
+
     output_number = ''
 
     base_codes = {
@@ -147,6 +164,8 @@ def convert (number, operation):
         error_code (3)
     if (output_base not in base_codes):
         error_code (4)
+
+    check = check_input (number, input_base)
 
     if (input_base != 'd'):
         number = x_to_decimal (number, base_codes[input_base])
@@ -167,7 +186,6 @@ def convert (number, operation):
 def main ():
 
     number, operation = get_input()
-
     convert (number, operation)
 
 
