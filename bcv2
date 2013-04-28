@@ -165,17 +165,18 @@ def convert (number, operation):
 
     if (input_base != 'd'):
         input_number = x_to_decimal (input_number, base_codes[input_base])
+
     else:
         input_number = int (input_number)
 
     if (output_base == 'd'):
-        output_number = input_number
+        output_number = number
 
     else:
         output_number = decimal_to_x (input_number, base_codes[output_base])
 
 
-    print ('Input:', number, 'Output:', output_number)
+    print ('Input:',number,'Output:',output_number)
 
 
 def main ():

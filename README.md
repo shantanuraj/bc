@@ -33,6 +33,7 @@ Troubleshooting:
 
 Understanding The Log:
 
+	FIX: Fix Issue; Resolve bug or fix issues.
 	MIN: Minor Change; Tweaked minor parts. Can be overlooked. 
 	MOD: Modification; Reworked existing feature.
 	NEW: New Feature; Added new functionality.
