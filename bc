@@ -2,7 +2,7 @@
 
 '''Program to perform various conversions, among the various,
    base systems; binary, octal, decimal and hexadecimal,
-   uses only to direct functions x->10 and 10->x.
+   uses only two direct functions x->10 and 10->x.
 '''
 
 #Most work done.
