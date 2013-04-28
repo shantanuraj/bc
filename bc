@@ -5,9 +5,7 @@
    uses only two direct functions x->10 and 10->x.
 '''
 
-#Most work done.
-#TODO
-#Provide checking for erronous conversions, eg. 15 bd, 8 od
+#Mostly working.
 
 import sys
 
