@@ -5,14 +5,14 @@ Base Converter program, to convert numbers across diffrent bases.
 
 Usage:
 
-	bc <number> <operation>
+	*bc <number> <operation>*
 
 Options:
 
-	b - binary
-	o - octal 
-	d - decmal
-	h - hexa-decimal
+	+ *b* - binary
+	+ *o* - octal 
+	+ *d* - decmal
+	+ *h* - hexa-decimal
 
 Example:
 
@@ -25,9 +25,16 @@ Example:
 
 Troubleshooting:
 
-	1. Having issues in running?
-	1. Most probably a permissions issue, run
+	+ Having issues in running?
+	+ Most probably a permissions issue, run
 		chmod +x bc
 	   to fix.
 
 
+Understanding The Log:
+
+	**MIN**: Minor Change; Tweaked minor parts. Can be overlooked. 
+	**MOD**: Modification; Reworked existing feature.
+	**NEW**: New Feature; Added new functionality.
+	**REG**: Regression; Removed functionality.
+	
