@@ -43,21 +43,13 @@ def get_input ():
     return number, operation
 
 
+def print_result (number, result):
+
+        print ('Input:', number, 'Output:', result)
+        sys.exit (0)
+
+
 def check_input (number, base):
-
-    if (base == 'b' or base == 'o' or base == 'd'):
-        try:
-            int (number)
-        except ValueError:
-            error_code (5)
-
-    check = range_check (number, base)
-    if (check == False):
-        error_code (5)
-
-    return True
-
-def range_check (number, base):
 
     range = {
                 'b':'01',
@@ -66,11 +58,29 @@ def range_check (number, base):
                 'h':'0123456789abcdef'
     }
 
+    check = True
+
     for digit in number:
         if digit not in range [base]:
-            return False
+            check = False
+
+    if (check == False):
+        error_code (5)
 
     return True
+
+
+def error_checks (input_number, input_base, output_base, base_codes):
+
+    if (input_base not in base_codes):
+        error_code (3)
+    if (output_base not in base_codes):
+        error_code (4)
+
+    check = check_input (input_number, input_base)
+
+    if (input_base == output_base):
+        print_result (input_number, input_number)
 
 
 def x_to_decimal (number, base):
@@ -156,12 +166,7 @@ def convert (number, operation):
                     'h':16
     }
 
-    if (input_base not in base_codes):
-        error_code (3)
-    if (output_base not in base_codes):
-        error_code (4)
-
-    check = check_input (input_number, input_base)
+    error_checks (input_number, input_base, output_base, base_codes)
 
     if (input_base != 'd'):
         input_number = x_to_decimal (input_number, base_codes[input_base])
@@ -175,7 +180,7 @@ def convert (number, operation):
         output_number = decimal_to_x (input_number, base_codes[output_base])
 
 
-    print ('Input:', number, 'Output:', output_number)
+    print_result (number, output_number)
 
 
 def main ():
